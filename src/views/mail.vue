@@ -35,13 +35,10 @@
         <div class="col-md-2">
           <button class="btn btn-primary w-100" @click="addItem">Tambah</button>
         </div>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-success" @click="printDocument">
-        Print Surat
+        <button class="btn btn-success" @click="printDocument">
+        🖨️ Print Surat
       </button>
+      </div>
     </div>
 
     <div
@@ -92,7 +89,7 @@
           <p><strong>Pihak Pembuat</strong></p>
           <br /><br />
           <p>____________________</p>
-          <p>Arif Alexander</p>
+          <p contenteditable="true">Arif Alexander</p> 
         </div>
         <div>
           <p><strong>Klien</strong></p>
