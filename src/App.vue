@@ -1,39 +1,21 @@
 <template>
   <div id="app">
     <div class="app-container">
-      <aside class="sidebar">
-        <h4 class="text-title">Freelance Tool</h4>
-        <hr />
-        <div class="d-flex flex-column">
-          <router-link to="/" class="nav-link text-center" exact>
-            <span class="icon">🏠</span> Home
-          </router-link>
-          <router-link to="/about" class="nav-link text-center">
-            <span class="icon">ℹ️</span> About Developer
-          </router-link>
-        </div>
-        <hr />
-        <!-- Todo List -->
-        <router-link to="/todo" class="nav-link text-center">
-          <span class="icon">📝</span> Todo List
-        </router-link>
-        <!-- Project List -->
-        <router-link to="/project" class="nav-link text-center">
-          <span class="icon">📂</span> Project List
-        </router-link>
-        <!-- Count budgeting, balance, Income & Expenses -->
-        <router-link to="/finance" class="nav-link text-center">
-          <span class="icon">💰</span> Finance
-        </router-link>
-        <!-- Mail contract Builder -->
-        <router-link to="/mail" class="nav-link text-center">
-          <span class="icon">✉️</span> Mail Builder
-        </router-link>
-      </aside>
-
       <main class="main-content">
         <router-view />
       </main>
+
+      <!-- Dock-style Sidebar -->
+      <aside class="dock-sidebar">
+        <router-link to="/" class="dock-icon" exact-data-tooltip="Home">
+          🏠
+        </router-link>
+        <router-link to="/about" class="dock-icon"> ℹ️ </router-link>
+        <router-link to="/todo" class="dock-icon"> 📝 </router-link>
+        <router-link to="/project" class="dock-icon"> 📂 </router-link>
+        <router-link to="/finance" class="dock-icon"> 💰 </router-link>
+        <router-link to="/mail" class="dock-icon"> ✉️ </router-link>
+      </aside>
     </div>
   </div>
 </template>
@@ -41,50 +23,74 @@
 <style scoped>
 .app-container {
   display: flex;
-  overflow: hidden;
+  flex-direction: column;
   min-height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-}
-
-.sidebar {
-  width: 220px;
-  background-color: #2c3e50;
-  color: white;
-  padding: 20px;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-  font-size: 1.4em;
-  margin-bottom: 30px;
-  font-weight: bold;
-  color: #42b983;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 0;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.nav-link.router-link-exact-active,
-.nav-link:hover {
-  color: #42b983;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
+  background: #f2f7ff;
 }
 
 .main-content {
   flex: 1;
   padding: 40px;
-  background: #f5f7fa;
+}
+
+/* Dock-style Sidebar */
+.dock-sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 24px;
+  background: rgba(44, 62, 80, 0.95);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.dock-icon {
+  font-size: 1.8em;
+  color: white;
+  text-decoration: none;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  position: relative;
+}
+
+.dock-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.dock-icon:hover::after {
+  opacity: 1;
+}
+
+.dock-icon:hover {
+  transform: scale(1.4);
+  color: #42b983;
+}
+
+.dock-icon.router-link-exact-active {
+  transform: scale(1.2);
+  color: #42b983;
 }
 </style>
