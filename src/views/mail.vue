@@ -63,7 +63,7 @@
         <strong>Rp {{ totalBiaya.toLocaleString("id-ID") }}</strong
         >.
       </p>
-      <p>
+      <p contenteditable="true">
         Proyek ini mencakup:
         <em>{{ form.deskripsi || "[Deskripsi Pekerjaan]" }}</em>
       </p>
