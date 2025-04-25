@@ -1,96 +1,144 @@
 <template>
   <div id="app">
-    <div class="app-container">
-      <main class="main-content">
-        <router-view />
-      </main>
+    <!-- Sidebar -->
+    <aside :class="['sidebar', { collapsed: isCollapsed }]">
+      <button class="toggle-btn" @click="isCollapsed = !isCollapsed">
+        <span v-if="isCollapsed">➡️</span>
+        <span v-else>Tap To Close Me ⬅️</span>
+      </button>
 
-      <!-- Dock-style Sidebar -->
-      <aside class="dock-sidebar">
-        <router-link to="/" class="dock-icon" exact-data-tooltip="Home">
-          🏠
-        </router-link>
-        <router-link to="/about" class="dock-icon"> ℹ️ </router-link>
-        <router-link to="/todo" class="dock-icon"> 📝 </router-link>
-        <router-link to="/project" class="dock-icon"> 📂 </router-link>
-        <router-link to="/finance" class="dock-icon"> 💰 </router-link>
-        <router-link to="/mail" class="dock-icon"> ✉️ </router-link>
-      </aside>
-    </div>
+      <router-link to="/" class="sidebar-item">
+        <span class="icon">🏠</span>
+        <span v-if="!isCollapsed" class="text">Beranda</span>
+      </router-link>
+      <router-link to="/about" class="sidebar-item">
+        <span class="icon">ℹ️</span>
+        <span v-if="!isCollapsed" class="text">Tentang</span>
+      </router-link>
+      <router-link to="/todo" class="sidebar-item">
+        <span class="icon">📝</span>
+        <span v-if="!isCollapsed" class="text">Todo</span>
+      </router-link>
+      <router-link to="/project" class="sidebar-item">
+        <span class="icon">📂</span>
+        <span v-if="!isCollapsed" class="text">Proyek</span>
+      </router-link>
+      <router-link to="/finance" class="sidebar-item">
+        <span class="icon">💰</span>
+        <span v-if="!isCollapsed" class="text">Keuangan</span>
+      </router-link>
+      <router-link to="/mail" class="sidebar-item">
+        <span class="icon">✉️</span>
+        <span v-if="!isCollapsed" class="text">Mail</span>
+      </router-link>
+
+      <!-- Donate button -->
+      <a
+        href="https://trakteer.id/itsmebroarif/tip?open=true"
+        target="_blank"
+        class="sidebar-item donate-link"
+      >
+        <span class="icon">☕</span>
+        <span v-if="!isCollapsed" class="text">Donate</span>
+      </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <router-view />
+    </main>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isCollapsed: false,
+    };
+  },
+};
+</script>
+
 <style scoped>
-.app-container {
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* background: #f3f6fa; */
+}
+
+/* Sidebar Fix */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 220px;
+  background: #2c3e50;
+  color: white;
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  background: #f2f7ff;
+  gap: 16px;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 }
 
-.main-content {
-  flex: 1;
-  padding: 40px;
+.sidebar.collapsed {
+  width: 60px;
 }
 
-/* Dock-style Sidebar */
-.dock-sidebar {
+.sidebar-item {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 20px;
-  padding: 12px 24px;
-  background: rgba(44, 62, 80, 0.95);
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-.dock-icon {
-  font-size: 1.8em;
+  gap: 12px;
+  padding: 10px;
   color: white;
   text-decoration: none;
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
-  position: relative;
+  border-radius: 8px;
+  transition: background 0.2s;
 }
 
-.dock-icon::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 4px 8px;
-  font-size: 0.7rem;
-  border-radius: 4px;
-  opacity: 0;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: opacity 0.2s;
+.sidebar-item:hover {
+  background: #34495e;
 }
 
-.dock-icon:hover::after {
-  opacity: 1;
+.sidebar-item.router-link-exact-active {
+  background: #42b983;
 }
 
-.dock-icon:hover {
-  transform: scale(1.4);
-  color: #42b983;
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  margin-bottom: 16px;
+  cursor: pointer;
+  align-self: flex-end;
 }
 
-.dock-icon.router-link-exact-active {
-  transform: scale(1.2);
-  color: #42b983;
+.donate-link {
+  margin-top: auto;
+  background: #e67e22;
 }
+
+.donate-link:hover {
+  background: #d35400;
+}
+
+/* Main Content shift */
+.main-content {
+  margin-left: 220px;
+  padding: 40px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ .main-content {
+  margin-left: 60px;
+}
+
+/* Optional: transition for collapse */
 </style>
+
+
