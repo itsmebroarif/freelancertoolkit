@@ -98,20 +98,19 @@
         </transition-group>
       </table>
     </div>
-
-    <transition name="fade-slide">
-      <div
-        v-if="showToast"
-        class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-4 show"
-        style="z-index: 1055"
-        role="alert"
-      >
-        <div class="d-flex">
-          <div class="toast-body">Tindakan berhasil disimpan!</div>
-        </div>
-      </div>
-    </transition>
   </div>
+  <transition name="fade-slide">
+    <div
+      v-if="showToast"
+      class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-4 show"
+      style="z-index: 1055"
+      role="alert"
+    >
+      <div class="d-flex">
+        <div class="toast-body">Catatan Kegiatan berhasil disimpan!</div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
