@@ -29,7 +29,7 @@
       </router-link>
       <router-link to="/mail" class="sidebar-item">
         <span class="icon">✉️</span>
-        <span v-if="!isCollapsed" class="text">Mail</span>
+        <span v-if="!isCollapsed" class="text">Invoice</span>
       </router-link>
 
       <!-- Donate button -->
