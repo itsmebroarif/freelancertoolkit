@@ -59,23 +59,24 @@
       </div>
     </div>
     <!-- Toast Notification -->
-    <transition name="zoom-glow">
+  </div>
+  <transition name="zoom-glow">
+    <div
+      v-if="showToast"
+      class="toast-container position-fixed bottom-0 end-0 p-3 show"
+      style="z-index: 1055"
+      role="alertdialog"
+    >
       <div
-        v-if="showToast"
-        class="toast-container position-fixed bottom-0 end-0 p-3"
-        style="z-index: 1055"
+        class="toast align-items-center text-white bg-success border-0 show"
+        role="alert"
       >
-        <div
-          class="toast align-items-center text-white bg-success border-0 show"
-          role="alert"
-        >
-          <div class="d-flex">
-            <div class="toast-body">Catatan tersimpan!</div>
-          </div>
+        <div class="d-flex">
+          <div class="toast-body">Catatan tersimpan!</div>
         </div>
       </div>
-    </transition>
-  </div>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -150,7 +151,7 @@ const quotes = [
   "Jangan lupa istirahat, produktivitas butuh keseimbangan.",
   "Hasil terbaik datang dari dedikasi dan konsistensi.",
   "Freelancer adalah seniman waktu, ciptakan mahakaryamu.",
-  "Setiap tantangan adalah kesempatan untuk menunjukkan kemampuanmu."
+  "Setiap tantangan adalah kesempatan untuk menunjukkan kemampuanmu.",
 ];
 const quote = ref(quotes[Math.floor(Math.random() * quotes.length)]);
 
