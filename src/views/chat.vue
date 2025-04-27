@@ -1,7 +1,7 @@
 <template>
   <div class="chat-container" data-aos="zoom-in-down">
     <h1>Arif Chat Box</h1>
-    <p>ketik "Hallo" untuk help bubble</p>
+    <p>ketik "Help" untuk help bubble</p>
     <div class="chat-box" ref="chatBox">
       <div
         v-for="(message, index) in messages"
@@ -43,7 +43,7 @@ export default {
       messages: [],
       typing: false,
       responses: {
-        todo: "📝 Todo adalah daftar tugas kamu. Catat, atur deadline, dan checklist. aku membuatnya dengan langsung menaruh deadline disana tanpa waktu mulai karena aku yakin kamu sendiri tuh pasti naronya pas udah mulai jalan waktu pengerjaan jadi jangan males ngerjainnnya ya",
+        todo: "📝 Todo adalah daftar tugas kamu. Catat, atur deadline, dan checklist. Aku membuatnya dengan langsung menaruh deadline disana tanpa waktu mulai karena aku yakin kamu sendiri tuh pasti naronya pas udah mulai jalan waktu pengerjaan jadi jangan males ngerjainnnya ya",
         proyek:
           "📁 Proyek digunakan untuk mengelola pekerjaan besar jadi beberapa tugas kecil trus juga nyatet siapa klien kamu supaya jauh lebih gampang.",
         keuangan:
@@ -52,8 +52,16 @@ export default {
           "📨 Invoice digunakan untuk membuat tagihan ke klien dengan template rapi. Biasanya ini dipakai kalo kamu freelance biar kamu bisa nyatet keperluan kamu pada saat lagi ngerjain project sesuatu biar bisa nyatet harganya dan bisa punya template sendiri",
         developer:
           "👨‍💻 Developer: aku (Arif) adalah seorang developer yang lahir di Jakarta dan besar di Depok. Aku adalah pendiri Belajar Bareng dan Robust Tech Studio, dua Komunitas yang bergerak di bidang teknologi kreatif seperti web dan app development, network engineering, dan database management. Tapi selain itu aku juga bisa jadi seorang musisi yang bisa main gitar & piano juga xixixi",
-        kontak:
-          "🗨 kontak: silahkan simpen kontak aku di instagram (@eexxvvn), abis itu di email juga ada di (aripstrike@gmail.com). Ditunggu ya di personal chat jika ada kendala atau apapun itu xixixi",
+        kontak: {
+          message: "🗨 kontak: silahkan simpen kontak aku di instagram (@eexxvvn), abis itu di email juga ada di (aripstrike@gmail.com). Ditunggu ya di personal chat jika ada kendala atau apapun itu xixixi",
+          details: {
+            whatsapp: "085817048266 |",
+            instagram: "eexxvvn |",
+            youtube: "Arif Alexander |",
+            medium: "https://itsmebroarif.medium.com/ |",
+            website: "https://arifpermana.vercel.app/ |"
+          }
+        }
       },
       options: [
         "Todo",
@@ -61,7 +69,7 @@ export default {
         "Keuangan",
         "Invoice",
         "Tentang Developer",
-        "kontak",
+        "Kontak Arif",
       ],
       lastMessageOptions: [],
     };
@@ -75,7 +83,7 @@ export default {
       this.userInput = "";
       this.lastMessageOptions = [];
 
-      if (/hallo|halo|hai|hei/i.test(text)) {
+      if (/hallo|halo|hai|hei|holla|Help|Hao|Hau/i.test(text)) {
         this.showBotMessage(
           "Hai! Bisa saya bantu? Pilih salah satu:",
           this.options
@@ -95,7 +103,17 @@ export default {
 
       for (const key in this.responses) {
         if (input.includes(key)) {
-          reply = this.responses[key];
+          if (key === "kontak") {
+            const kontakDetails = this.responses.kontak.details;
+            reply = `${this.responses.kontak.message}
+            \n\nWhatsapp: ${kontakDetails.whatsapp}
+            \nInstagram: ${kontakDetails.instagram}
+            \nYoutube: ${kontakDetails.youtube}
+            \nMedium: ${kontakDetails.medium}
+            \nWebsite: ${kontakDetails.website}`;
+          } else {
+            reply = this.responses[key];
+          }
           break;
         }
       }
@@ -124,6 +142,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style scoped>
