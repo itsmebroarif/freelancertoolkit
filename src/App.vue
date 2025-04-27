@@ -31,6 +31,10 @@
         <span class="icon">✉️</span>
         <span v-if="!isCollapsed" class="text">Invoice</span>
       </router-link>
+      <router-link to="/chat" class="sidebar-item">
+        <span class="icon">💭</span>
+        <span v-if="!isCollapsed" class="text">Contact Developer</span>
+      </router-link>
 
       <!-- Donate button -->
       <a
