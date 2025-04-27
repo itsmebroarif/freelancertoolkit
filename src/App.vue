@@ -4,7 +4,7 @@
     <aside :class="['sidebar', { collapsed: isCollapsed }]">
       <button class="toggle-btn" @click="isCollapsed = !isCollapsed">
         <span v-if="isCollapsed">➡️</span>
-        <span v-else>Tap To Close Me ⬅️</span>
+        <span v-else>Freelancer toolkit ‎  ⬅️</span>
       </button>
 
       <router-link to="/" class="sidebar-item">
