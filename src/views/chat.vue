@@ -1,5 +1,5 @@
 <template>
-    <div class="chat-container">
+    <div class="chat-container" data-aos="flip-up">
       <h1>Arif Chat Box</h1>
       <p>ketik "Hallo" untuk help bubble</p>
       <div class="chat-box" ref="chatBox">
